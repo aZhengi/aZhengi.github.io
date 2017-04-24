@@ -1,0 +1,430 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <meta name="author" content="Callback">
+  
+  
+  
+  
+    <meta name="description" content="对象字面量语法的扩展方法简写而有一点区别是：方法简写能使用 super ，而非简写的方法则不能
+
+使用方法简写速记法创建的方法，其 name 属性（名称属性）就是括号之前的名称
+
+动态属性名方括号允许你将变量或字符串字面量指定为属性名，而在字符串中允许存在作为标识符时会导致语法错误的特殊字符。这里有个范例：
+12345678var person = &#123;&#125;,    last...">
+  
+  <title> [ Life ]</title>
+  
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  
+  <link rel="stylesheet" href="/css/random.css">
+<link rel="stylesheet" href="/css/vegas.min.css">
+<link rel="stylesheet" href="/css/highlight-railscasts.css">
+<link rel="stylesheet" href="/css/jquery.fancybox.css">
+<link rel="stylesheet" href="/css/iconfont/iconfont.css">
+<link rel="stylesheet" href="/css/jquery.fancybox-thumbs.css">
+<link rel="stylesheet" href="/css/plyr.css">
+  
+</head>
+
+<body>
+<div class="side-navigate hide-area">
+  
+    <div class="item prev">
+      <a href="/2017/04/24/hello-world/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Hello World
+      </div>
+    </div>
+  
+  
+</div>
+<div id="outer-container" class="hide-area">
+<div id="container">
+  <div id="menu-outer" class="slide-down">
+    <div id="menu-inner">
+      <div id="brand">
+        
+        <a onClick="openUserCard()">
+          <img id="avatar" src="http://7te9fe.com1.z0.glb.clouddn.com/default_avatar.jpg"/>
+          <div id="homelink">Life</div>
+        </a>
+      </div>
+      <div id="menu-list">
+        <ul>
+        
+        
+          
+            <li>
+          
+            <a href="/index.html">Home</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/archives">Archives</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/tags">Tags</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/categories">Categories</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/about">About</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="https://github.com/stiekel/hexo-theme-random">Github</a>
+            
+          </li>
+        
+        </ul>
+      </div>
+      <div id="show-menu">
+        <button>Menu</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="content-outer">
+    <div id="content-inner">
+      
+      
+  <article id="post">
+    <h1>No Title</h1>
+    <p class="page-title-sub">
+      <span id = "post-title-date">Created at 2017-04-25</span>
+      
+        <span id = "post-title-updated">Updated at 2017-04-24</span>
+      
+      
+      
+    </p>
+    
+    <h3 id="对象字面量语法的扩展"><a href="#对象字面量语法的扩展" class="headerlink" title="对象字面量语法的扩展"></a>对象字面量语法的扩展</h3><h4 id="方法简写"><a href="#方法简写" class="headerlink" title="方法简写"></a>方法简写</h4><p>而有一点区别是：方法简写能使用 <code>super</code> ，而非简写的方法则不能</p>
+<blockquote>
+<p>使用方法简写速记法创建的方法，其 <code>name</code> 属性（名称属性）就是括号之前的名称</p>
+</blockquote>
+<h4 id="动态属性名"><a href="#动态属性名" class="headerlink" title="动态属性名"></a>动态属性名</h4><p>方括号允许你将变量或字符串字面量指定为属性名，而在字符串中允许存在作为标识符时会导致语法错误的特殊字符。这里有个范例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> person = &#123;&#125;,</div><div class="line">    lastName = <span class="string">"last name"</span>;</div><div class="line"></div><div class="line">person[<span class="string">"first name"</span>] = <span class="string">"Nicholas"</span>;</div><div class="line">person[lastName] = <span class="string">"Zakas"</span>;</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(person[<span class="string">"first name"</span>]);      <span class="comment">// "Nicholas"</span></div><div class="line"><span class="built_in">console</span>.log(person[lastName]);          <span class="comment">// "Zakas"</span></div></pre></td></tr></table></figure>
+<p>此外，你可以在对象字面量中将字符串字面量直接用作属性，就像这样：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> person = &#123;</div><div class="line">    <span class="string">"first name"</span>: <span class="string">"Nicholas"</span></div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(person[<span class="string">"first name"</span>]);      <span class="comment">// "Nicholas"</span></div></pre></td></tr></table></figure>
+<p>这种模式要求属性名事先已知、并且能用字符串字面量表示。然而，若属性名被包含在变量中（就像前面例子中的 <code>&quot;first name&quot;</code> ），或者必须通过计算才能获得，那么在 ES5 的对象字面量中就无法定义这种属性。</p>
+<p>在 ES6 中，需计算属性名是对象字面量语法的一部分，它用的也是方括号表示法，与此前在对象实例上的用法一致。例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> lastName = <span class="string">"last name"</span>;</div><div class="line"></div><div class="line"><span class="keyword">var</span> person = &#123;</div><div class="line">    <span class="string">"first name"</span>: <span class="string">"Nicholas"</span>,</div><div class="line">    [lastName]: <span class="string">"Zakas"</span></div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(person[<span class="string">"first name"</span>]);      <span class="comment">// "Nicholas"</span></div><div class="line"><span class="built_in">console</span>.log(person[lastName]);          <span class="comment">// "Zakas"</span></div></pre></td></tr></table></figure>
+<p>对象字面量内的方括号表明该属性名需要计算，其结果是一个字符串。这意味着其中可以包含表达式，像下面这样：    </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> suffix = <span class="string">" name"</span>;</div><div class="line"></div><div class="line"><span class="keyword">var</span> person = &#123;</div><div class="line">    [<span class="string">"first"</span> + suffix]: <span class="string">"Nicholas"</span>,</div><div class="line">    [<span class="string">"last"</span> + suffix]: <span class="string">"Zakas"</span></div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(person[<span class="string">"first name"</span>]);      <span class="comment">// "Nicholas"</span></div><div class="line"><span class="built_in">console</span>.log(person[<span class="string">"last name"</span>]);       <span class="comment">// "Zakas"</span></div></pre></td></tr></table></figure>
+<p>这些属性名被计算为 <code>&quot;first name&quot;</code> 与 <code>&quot;last name&quot;</code> ，而这两个字符串此后可以用来引用对应属性。使用方括号表示法，</p>
+<p><strong>任何能放在对象实例方括号内的东西，都可以作为需计算属性名用在对象字面量中。</strong></p>
+<h3 id="新的方法"><a href="#新的方法" class="headerlink" title="新的方法"></a>新的方法</h3><p>ES6 在 <code>Object</code> 对象上引入了两个新方法，以便让特定任务更易完成</p>
+<h4 id="Object-is-方法"><a href="#Object-is-方法" class="headerlink" title="Object.is() 方法"></a>Object.is() 方法</h4><p>但严格相等运算符也并不完全准确，例如，即使这两者在 JS 引擎中有不同的表示，它也会认为 <code>+0</code> 与 <code>-0</code> 相等，</p>
+<p>另外 <code>NaN === NaN</code> 会返回 <code>false</code> ，因此有必要使用 <code>isNaN()</code> 函数来正确检测 <code>NaN</code> 。</p>
+<p>ES6 引入了 <code>Object.is()</code> 方法来弥补严格相等运算符残留的怪异点。此方法接受两个参数，并会在二者的值相等时返回 <code>true</code> ，此时要求二者类型相同并且值也相等。这有个例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">console</span>.log(+<span class="number">0</span> == <span class="number">-0</span>);              <span class="comment">// true</span></div><div class="line"><span class="built_in">console</span>.log(+<span class="number">0</span> === <span class="number">-0</span>);             <span class="comment">// true</span></div><div class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.is(+<span class="number">0</span>, <span class="number">-0</span>));     <span class="comment">// false</span></div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(<span class="literal">NaN</span> == <span class="literal">NaN</span>);            <span class="comment">// false</span></div><div class="line"><span class="built_in">console</span>.log(<span class="literal">NaN</span> === <span class="literal">NaN</span>);           <span class="comment">// false</span></div><div class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.is(<span class="literal">NaN</span>, <span class="literal">NaN</span>));   <span class="comment">// true</span></div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(<span class="number">5</span> == <span class="number">5</span>);                <span class="comment">// true</span></div><div class="line"><span class="built_in">console</span>.log(<span class="number">5</span> == <span class="string">"5"</span>);              <span class="comment">// true</span></div><div class="line"><span class="built_in">console</span>.log(<span class="number">5</span> === <span class="number">5</span>);               <span class="comment">// true</span></div><div class="line"><span class="built_in">console</span>.log(<span class="number">5</span> === <span class="string">"5"</span>);             <span class="comment">// false</span></div><div class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.is(<span class="number">5</span>, <span class="number">5</span>));       <span class="comment">// true</span></div><div class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.is(<span class="number">5</span>, <span class="string">"5"</span>));     <span class="comment">// false</span></div></pre></td></tr></table></figure>
+<p>在许多情况下， <code>Object.is()</code> 的结果与 <code>===</code> 运算符是相同的，仅有的另外是<code>+0</code>和<code>-0</code>，以及<code>NaN</code>。不过仍然没必要停止使用严格相等运算符，选择 <code>Object.is()</code> ，还是选择 <code>==</code> 或 <code>===</code> ，取决于代码的实际情况。</p>
+<blockquote>
+<p><code>Object.is()</code>弥补了<code>===</code>的缺点.</p>
+</blockquote>
+<h4 id="Object-assign-方法"><a href="#Object-assign-方法" class="headerlink" title="Object.assign() 方法"></a>Object.assign() 方法</h4><p>很多 JS 的库中都有类似下面的混入方法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">mixin</span>(<span class="params">receiver, supplier</span>) </span>&#123;</div><div class="line">    <span class="built_in">Object</span>.keys(supplier).forEach(<span class="function"><span class="keyword">function</span>(<span class="params">key</span>) </span>&#123;</div><div class="line">        receiver[key] = supplier[key];</div><div class="line">    &#125;);</div><div class="line"></div><div class="line">    <span class="keyword">return</span> receiver;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><code>Object.assign()</code> 方法接受任意数量的供应者，而接收者会按照供应者在参数中的顺序来依次接收它们的属性。这意味着在接收者中，第二个供应者的属性可能会覆盖第一个供应者的，这在下面的代码片段中就发生了</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> receiver = &#123;&#125;;</div><div class="line"></div><div class="line"><span class="built_in">Object</span>.assign(receiver,</div><div class="line">    &#123;</div><div class="line">        <span class="attr">type</span>: <span class="string">"js"</span>,</div><div class="line">        <span class="attr">name</span>: <span class="string">"file.js"</span></div><div class="line">    &#125;,</div><div class="line">    &#123;</div><div class="line">        <span class="attr">type</span>: <span class="string">"css"</span></div><div class="line">    &#125;</div><div class="line">);</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(receiver.type);     <span class="comment">// "css"</span></div><div class="line"><span class="built_in">console</span>.log(receiver.name);     <span class="comment">// "file.js"</span></div></pre></td></tr></table></figure>
+<p><code>receiver.type</code> 的值为 <code>&quot;css&quot;</code> ，这是因为第二个供应者覆盖了第一个供应者的值。</p>
+<p><code>Object.assign()</code> 方法并不是 ES6 的一项重大扩展，但它确实将很多 JS 库中的一个公共方法标准化了。</p>
+<p><strong>操作访问器属性</strong></p>
+<p>需要记住 <code>Object.assign()</code> 并未在接收者上创建访问器属性，即使供应者拥有访问器属性。由于 <code>Object.assign()</code> 使用赋值运算符，供应者的访问器属性就会转变成接收者的数据属性，例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> receiver = &#123;&#125;,</div><div class="line">supplier = &#123;</div><div class="line">  get name() &#123;</div><div class="line">      <span class="keyword">return</span> <span class="string">"file.js"</span></div><div class="line">  &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="built_in">Object</span>.assign(receiver, supplier);</div><div class="line"></div><div class="line"><span class="keyword">var</span> descriptor = <span class="built_in">Object</span>.getOwnPropertyDescriptor(receiver, <span class="string">"name"</span>);</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(descriptor.value);      <span class="comment">// "file.js"</span></div><div class="line"><span class="built_in">console</span>.log(descriptor.get);        <span class="comment">// undefined</span></div></pre></td></tr></table></figure>
+<p>此代码中的 <code>supplier</code> 对象拥有一个名为 <code>name</code> 的访问器属性。在使用了 <code>Object.assign()</code> 方法后， <code>receiver.name</code> 就作为一个数据属性存在了，其值为 <code>&quot;file.js&quot;</code> ，这是因为在调用 <code>Object.assign()</code> 时， <code>supplier.name</code> 返回的值是 <code>&quot;file.js&quot;</code> 。</p>
+<h3 id="重复的对象字面量属性"><a href="#重复的对象字面量属性" class="headerlink" title="重复的对象字面量属性"></a>重复的对象字面量属性</h3><p>ES6 移除了重复属性的检查，严格模式与非严格模式都不再检查重复的属性。当存在重复属性时，排在后面的属性的值会成为该属性的实际值，如下所示：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">"use strict"</span>;</div><div class="line"></div><div class="line"><span class="keyword">var</span> person = &#123;</div><div class="line">    <span class="attr">name</span>: <span class="string">"Nicholas"</span>,</div><div class="line">    <span class="attr">name</span>: <span class="string">"Greg"</span>        <span class="comment">// 在 ES6 严格模式中不会出错</span></div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(person.name);       <span class="comment">// "Greg"</span></div></pre></td></tr></table></figure>
+<p>在本例中， <code>person.name</code> 的值为 <code>&quot;Greg&quot;</code> ，因为这是赋给该属性的最后一个值。</p>
+<h3 id="自有属性的枚举顺序"><a href="#自有属性的枚举顺序" class="headerlink" title="自有属性的枚举顺序"></a>自有属性的枚举顺序</h3><p>ES5 并没有定义对象属性的枚举顺序，而是把该问题留给了 JS 引擎厂商。而 ES6 则严格定义了对象自有属性在被枚举时返回的顺序。这对 <code>Object.getOwnPropertyNames()</code> 与 <code>Reflect.ownKeys</code> （详见第十二章）如何返回属性造成了影响，还同样影响了 <code>Object.assign()</code> 处理属性的顺序。</p>
+<p>自有属性枚举时基本顺序如下：</p>
+<ol>
+<li>所有的数字类型键，按升序排列。</li>
+<li>所有的字符串类型键，按被添加到对象的顺序排列。</li>
+<li>所有的符号类型（详见第六章）键，也按添加顺序排列。</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> obj = &#123;</div><div class="line">    <span class="attr">a</span>: <span class="number">1</span>,</div><div class="line">    <span class="number">0</span>: <span class="number">1</span>,</div><div class="line">    <span class="attr">c</span>: <span class="number">1</span>,</div><div class="line">    <span class="number">2</span>: <span class="number">1</span>,</div><div class="line">    <span class="attr">b</span>: <span class="number">1</span>,</div><div class="line">    <span class="number">1</span>: <span class="number">1</span></div><div class="line">&#125;;</div><div class="line"></div><div class="line">obj.d = <span class="number">1</span>;</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.getOwnPropertyNames(obj).join(<span class="string">""</span>));     <span class="comment">// "012acbd"</span></div></pre></td></tr></table></figure>
+<p><code>Object.getOwnPropertyNames()</code> 方法按 <code>0</code> 、 <code>1</code> 、 <code>2</code> 、 <code>a</code> 、 <code>c</code> 、 <code>b</code> 、 <code>d</code> 的顺序返回了 <code>obj</code> 对象的属性。注意，数值类型的键会被合并并排序，即使这未遵循在对象字面量中的顺序。字符串类型的键会跟在数值类型的键之后，按照被添加到 <code>obj</code> 对象的顺序，在对象字面量中定义的键会首先出现，接下来是此后动态添加到对象的键</p>
+<blockquote>
+<p><code>for-in</code> 循环的枚举顺序仍未被明确规定，因为并非所有的 JS 引擎都采用相同的方式。而 <code>Object.keys()</code> 和 <code>JSON.stringify()</code> 也使用了与 <code>for-in</code> 一样的枚举顺序。</p>
+</blockquote>
+<p>虽然枚举顺序的变动对 JS 的工作方式影响甚小，但是依赖于特定枚举顺序才能正确运行的程序并不罕见。因此 ES6 通过规定枚举的顺序，以确保依赖枚举操作的 JS 代码都能正常工作，而不用在意其运行环境。</p>
+<h3 id="更强大的原型"><a href="#更强大的原型" class="headerlink" title="更强大的原型"></a>更强大的原型</h3><p>随着语言的成熟，开发者也越来越熟悉原型的工作机制，因此他们明显希望能对原型有更多控制权，并能更方便地使用它。于是 ES6 就给原型引入了一些改进。</p>
+<h4 id="修改对象的原型"><a href="#修改对象的原型" class="headerlink" title="修改对象的原型"></a>修改对象的原型</h4><p>尽管 ES5 添加了 <code>Object.getPrototypeOf()</code> 方法来从任意指定对象中获取其原型，但仍然缺少在初始化之后更改对象原型的标准方法。</p>
+<p>ES6 通过添加 <code>Object.setPrototypeOf()</code> 方法而改变了这种假定，此方法允许你修改任意指定对象的原型。它接受两个参数：需要被修改原型的对象，以及将会成为前者原型的对象。例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> person = &#123;</div><div class="line">    getGreeting() &#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">"Hello"</span>;</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">let</span> dog = &#123;</div><div class="line">    getGreeting() &#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">"Woof"</span>;</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="comment">// 原型为 person</span></div><div class="line"><span class="keyword">let</span> friend = <span class="built_in">Object</span>.create(person);</div><div class="line"><span class="built_in">console</span>.log(friend.getGreeting());                      <span class="comment">// "Hello"</span></div><div class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.getPrototypeOf(friend) === person);  <span class="comment">// true</span></div><div class="line"></div><div class="line"><span class="comment">// 将原型设置为 dog</span></div><div class="line"><span class="built_in">Object</span>.setPrototypeOf(friend, dog);</div><div class="line"><span class="built_in">console</span>.log(friend.getGreeting());                      <span class="comment">// "Woof"</span></div><div class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.getPrototypeOf(friend) === dog);     <span class="comment">// true</span></div></pre></td></tr></table></figure>
+<p>此代码定义了两个基础对象： <code>person</code> 与 <code>dog</code> ，二者都拥有一个名为 <code>getGreeting()</code> 的方法，用于返回一个字符串。 <code>friend</code> 对象起初继承了 <code>person</code> 对象，意味着 <code>friend.getGreeting()</code> 方法会输出 <code>&quot;Hello&quot;</code> ；当它的原型被更改为 <code>dog</code> 对象， <code>friend.getGreeting()</code> 方法就会改而输出 <code>&quot;Woof&quot;</code> ，因为原先与 <code>person</code> 的关联已经被破坏了。</p>
+<p>对象原型的实际值被存储在一个内部属性 <code>[[Prototype]]</code> 上， <code>Object.getPrototypeOf()</code> 方法会返回此属性存储的值，而 <code>Object.setPrototypeOf()</code> 方法则能够修改该值。不过，使用 <code>[[Prototype]]</code> 属性的方式还不止这些。</p>
+<h4 id="使用-super-引用的简单原型访问"><a href="#使用-super-引用的简单原型访问" class="headerlink" title="使用 super 引用的简单原型访问"></a>使用 super 引用的简单原型访问</h4><p>正如前面提到的，原型对 JS 来说非常重要，而 ES6 也进行了很多工作来让它更易用。关于原型的另一项进步就是引入了 <code>super</code> 引用，这让在原型上的函数调用变得更容易。例如，若要覆盖对象实例的一个方法、但依然要调用原型上的同名方法，你可能会这么做：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> person = &#123;</div><div class="line">    getGreeting() &#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">"Hello"</span>;</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">let</span> dog = &#123;</div><div class="line">    getGreeting() &#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">"Woof"</span>;</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">let</span> friend = &#123;</div><div class="line">    getGreeting() &#123;</div><div class="line">        <span class="keyword">return</span> <span class="built_in">Object</span>.getPrototypeOf(<span class="keyword">this</span>).getGreeting.call(<span class="keyword">this</span>) + <span class="string">", hi!"</span>;</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="comment">// 将原型设置为 person</span></div><div class="line"><span class="built_in">Object</span>.setPrototypeOf(friend, person);</div><div class="line"><span class="built_in">console</span>.log(friend.getGreeting());                      <span class="comment">// "Hello, hi!"</span></div><div class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.getPrototypeOf(friend) === person);  <span class="comment">// true</span></div><div class="line"></div><div class="line"><span class="comment">// 将原型设置为 dog</span></div><div class="line"><span class="built_in">Object</span>.setPrototypeOf(friend, dog);</div><div class="line"><span class="built_in">console</span>.log(friend.getGreeting());                      <span class="comment">// "Woof, hi!"</span></div><div class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.getPrototypeOf(friend) === dog);     <span class="comment">// true</span></div></pre></td></tr></table></figure>
+<p>本例中 <code>friend</code> 上的 <code>getGreeting()</code> 调用了对象上的同名方法。 <code>Object.getPrototypeOf()</code> 方法确保了能调用正确的原型，并在其返回结果上附加了一个字符串；而附加的 <code>call(this)</code> 代码则能确保正确设置原型方法内部的 <code>this</code> 值。</p>
+<p>调用原型上的方法时要记住使用 <code>Object.getPrototypeOf()</code> 与 <code>.call(this)</code> ，这有点复杂难懂，因此 ES6 才引入了 <code>super</code> 。简单来说， <code>super</code> 是指向当前对象的原型的一个指针，实际上就是 <code>Object.getPrototypeOf(this)</code> 的值。知道这些，你就可以像下面这样简化 <code>getGreeting()</code> 方法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> friend = &#123;</div><div class="line">    getGreeting() &#123;</div><div class="line">        <span class="comment">// 这相当于上个例子中的：</span></div><div class="line">        <span class="comment">// Object.getPrototypeOf(this).getGreeting.call(this)</span></div><div class="line">        <span class="keyword">return</span> <span class="keyword">super</span>.getGreeting() + <span class="string">", hi!"</span>;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>你能使用 <code>super</code> 引用来调用对象原型上的任何方法，只要这个引用是位于简写的方法之内。试图在方法简写之外的情况使用 <code>super</code> 会导致语法错误，正如下例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> friend = &#123;</div><div class="line">    <span class="attr">getGreeting</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="comment">// 语法错误</span></div><div class="line">        <span class="keyword">return</span> <span class="keyword">super</span>.getGreeting() + <span class="string">", hi!"</span>;</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"><span class="comment">//在这种上下文中 super 是不可用的。</span></div></pre></td></tr></table></figure>
+<p>当使用多级继承时， <code>super</code> 引用就是非常强大的，因为这种情况下 <code>Object.getPrototypeOf()</code> 不再适用于所有场景，例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> person = &#123;</div><div class="line">    getGreeting() &#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">"Hello"</span>;</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="comment">// 原型为 person</span></div><div class="line"><span class="keyword">let</span> friend = &#123;</div><div class="line">    getGreeting() &#123;</div><div class="line">        <span class="keyword">return</span> <span class="built_in">Object</span>.getPrototypeOf(<span class="keyword">this</span>).getGreeting.call(<span class="keyword">this</span>) + <span class="string">", hi!"</span>;</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"><span class="built_in">Object</span>.setPrototypeOf(friend, person);</div><div class="line"></div><div class="line"><span class="comment">// 原型为 friend</span></div><div class="line"><span class="keyword">let</span> relative = <span class="built_in">Object</span>.create(friend);</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(person.getGreeting());                  <span class="comment">// "Hello"</span></div><div class="line"><span class="built_in">console</span>.log(friend.getGreeting());                  <span class="comment">// "Hello, hi!"</span></div><div class="line"><span class="built_in">console</span>.log(relative.getGreeting());                <span class="comment">// error!</span></div></pre></td></tr></table></figure>
+<p>调用 <code>Object.getPrototypeOf()</code> 时，在调用 <code>relative.getGreeting()</code> 处发生了错误。这是因为此时 <code>this</code>的值是 <code>relative</code> ，而 <code>relative</code> 的原型是 <code>friend</code> 对象，这样 <code>friend.getGreeting().call()</code> 调用就会导致进程开始反复进行递归调用，直到发生堆栈错误。</p>
+<p>此问题在 ES5 中很难解决，但若使用 ES6 的 <code>super</code> ，就很简单了：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> person = &#123;</div><div class="line">    getGreeting() &#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">"Hello"</span>;</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="comment">// 原型为 person</span></div><div class="line"><span class="keyword">let</span> friend = &#123;</div><div class="line">    getGreeting() &#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">super</span>.getGreeting() + <span class="string">", hi!"</span>;</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"><span class="built_in">Object</span>.setPrototypeOf(friend, person);</div><div class="line"></div><div class="line"><span class="comment">// 原型为 friend</span></div><div class="line"><span class="keyword">let</span> relative = <span class="built_in">Object</span>.create(friend);</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(person.getGreeting());                  <span class="comment">// "Hello"</span></div><div class="line"><span class="built_in">console</span>.log(friend.getGreeting());                  <span class="comment">// "Hello, hi!"</span></div><div class="line"><span class="built_in">console</span>.log(relative.getGreeting());                <span class="comment">// "Hello, hi!"</span></div></pre></td></tr></table></figure>
+<p>由于 <code>super</code> 引用并非是动态的，它总是能指向正确的对象。在本例中， <code>super.getGreeting()</code> 总是指向 <code>person.getGreeting()</code> ，而不管有多少对象继承了此方法。</p>
+<h3 id="正式的-“方法”定义"><a href="#正式的-“方法”定义" class="headerlink" title="正式的 “方法”定义"></a>正式的 “方法”定义</h3><p>在 ES6 之前，“方法”的概念从未被正式定义，它此前仅指对象的函数属性（而非数据属性）。 ES6 则正式做出了定义：方法是一个拥有 <code>[[HomeObject]]</code> 内部属性的函数，此内部属性指向该方法所属的对象。研究以下例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> person = &#123;</div><div class="line"></div><div class="line">    <span class="comment">// 方法</span></div><div class="line">    getGreeting() &#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">"Hello"</span>;</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="comment">// 并非方法</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">shareGreeting</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="string">"Hi!"</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>此例定义了拥有单个 <code>getGreeting()</code> 方法的 <code>person</code> 对象。由于 <code>getGreeting()</code> 被直接赋给了一个对象，它的 <code>[[HomeObject]]</code> 属性值就是 <code>person</code> 。 而另一方面， <code>shareGreeting()</code> 函数没有被指定 <code>[[HomeObject]]</code> 属性，因为它在被创建时并没有赋给一个对象。大多数情况下，这种差异并不重要，然而使用 <code>super</code> 引用时就完全不同了。</p>
+<p>任何对 <code>super</code> 的引用都会使用 <code>[[HomeObject]]</code> 属性来判断要做什么。第一步是在 <code>[[HomeObject]]</code> 上调用 <code>Object.getPrototypeOf()</code> 来获取对原型的引用；接下来，在该原型上查找同名函数；最后，创建 <code>this</code>绑定并调用该方法。这里有个例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> person = &#123;</div><div class="line">    getGreeting() &#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">"Hello"</span>;</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="comment">// 原型为 person</span></div><div class="line"><span class="keyword">let</span> friend = &#123;</div><div class="line">    getGreeting() &#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">super</span>.getGreeting() + <span class="string">", hi!"</span>;</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"><span class="built_in">Object</span>.setPrototypeOf(friend, person);</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(friend.getGreeting());  <span class="comment">// "Hello, hi!"</span></div></pre></td></tr></table></figure>
+<p>调用 <code>friend.getGreeting()</code> 返回了一个字符串，也就是 <code>person.getGreeting()</code> 的返回值与 <code>&quot;, hi!&quot;</code> 的合并结果。此时 <code>friend.getGreeting()</code> 的 <code>[[HomeObject]]</code> 值是 <code>friend</code> ，并且 <code>friend</code> 的原型是 <code>person</code> ，因此 <code>super.getGreeting()</code> 就等价于 <code>person.getGreeting.call(this)</code> 。</p>
+<blockquote>
+<p><code>[[HomeObject]]</code>是方法中的一个内部属性，只有属于对象的方法才有</p>
+<p><code>sper()</code>中的<code>[[HomeObject]]</code>指向所属的对象，<code>Object.getPrototypeOf( [[HomeObject]] )</code></p>
+</blockquote>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>ES6 为对象字面量做了几个改进。速记法属性定义能够更轻易地将作用域内的变量赋值给对象的同名属性;</p>
+<p>需计算属性名允许你将非字面量的值指定为属性的名称，就像此前在其他场合的用法那样;</p>
+<p>方法简写让你在对象字面量中定义方法时能省略冒号和 <code>function</code> 关键字，从而减少输入的字符数;</p>
+<p>ES6 还舍弃了对象字面量中重复属性名的检查，意味着你可以在一个对象字面量中书写两个同名属性，而不会抛出错误;</p>
+<p><code>Object.assign()</code> 方法使得一次性更改单个对象的多个属性变得更加容易，这在你使用混入模式时非常有用;</p>
+<p><code>Object.is()</code> 方法对任何值都会执行严格相等比较，当在处理特殊的 JS 值时，它有效成为了 <code>===</code> 的一个更安全的替代品;</p>
+<p>对象自有属性的枚举顺序在 ES6 中被明确定义了。在枚举属性时，数字类型的键总是会首先出现，并按升序排列，此后是字符串类型的键，最后是符号类型的键，后两者都分别按添加顺序排列;</p>
+<p>感谢 ES6 的 <code>Object.setPrototypeOf()</code> 方法，现在能够在对象已被创建之后更改它的原型了。</p>
+<p>最后，你能用 <code>super</code> 关键字来调用对象原型上的方法，所调用的方法会被设置好其内部的 <code>this</code> 绑定，以自动使用该 <code>this</code> 值来进行工作。</p>
+
+  </article>
+  <div class="random-toc-area">
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
+  <div class="random-toc">
+    <h2>Table of Content</h2>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#对象字面量语法的扩展"><span class="toc-text">对象字面量语法的扩展</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#方法简写"><span class="toc-text">方法简写</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#动态属性名"><span class="toc-text">动态属性名</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#新的方法"><span class="toc-text">新的方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Object-is-方法"><span class="toc-text">Object.is() 方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Object-assign-方法"><span class="toc-text">Object.assign() 方法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#重复的对象字面量属性"><span class="toc-text">重复的对象字面量属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#自有属性的枚举顺序"><span class="toc-text">自有属性的枚举顺序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#更强大的原型"><span class="toc-text">更强大的原型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#修改对象的原型"><span class="toc-text">修改对象的原型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#使用-super-引用的简单原型访问"><span class="toc-text">使用 super 引用的简单原型访问</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#正式的-“方法”定义"><span class="toc-text">正式的 “方法”定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li></ol>
+  </div>
+</div>
+
+  
+<nav id="pagination">
+  
+    <a href="/2017/04/24/hello-world/" class="prev">&larr; Prev post Hello World</a>
+  
+
+  
+
+  
+</nav>
+
+  <!-- JiaThis Button BEGIN -->
+
+<!-- JiaThis Button END -->
+
+
+      
+      
+      
+    </div>
+  </div>
+
+  <div id="bottom-outer">
+    <div id="bottom-inner">
+      Site by Callback using
+      <a href="http://hexo.io">Hexo</a> & <a href="https://github.com/stiekel/hexo-theme-random">Random</a>
+      <br>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+
+<div id="user-card">
+  <div class="center-field">
+    <img class="avatar" src="http://7te9fe.com1.z0.glb.clouddn.com/default_avatar.jpg">
+    <p id="description"></p>
+    <ul class="social-icon">
+  
+  
+    <li>
+      <a href="https://github.com/stiekel/hexo-theme-random">
+        
+          <i class="icon iconfont github">&#xe606;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://coding.net/u/Stiekel">
+        
+          <i class="icon iconfont coding">&#xe607;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://twitter.com/SidCN">
+        
+          <i class="icon iconfont twitter">&#xe600;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="http://weibo.com/sidcn">
+        
+          <i class="icon iconfont weibo">&#xe602;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="http://www.douban.com/people/Stiekel/">
+        
+          <i class="icon iconfont douban">&#xe60f;</i>
+        
+      </a>
+    </li>
+  
+</ul>
+  </div>
+</div>
+
+
+<div id="btn-view">Hide</div>
+
+<script>
+// is trigger analytics / tongji script
+var isIgnoreHost = false;
+
+if(window && window.location && window.location.host) {
+  isIgnoreHost = ["localhost","127.0.0.1"].some(function(address){
+    return 0 === window.location.host.indexOf(address);
+  });
+}
+
+var isTriggerAnalytics = !( true && isIgnoreHost );
+
+</script>
+
+
+
+
+  
+  
+    <script src="/js/jquery-2.2.3.min.js"></script>
+  
+    <script src="/js/vegas.min.js"></script>
+  
+    <script src="/js/random.js"></script>
+  
+    <script src="/js/highlight.pack.js"></script>
+  
+    <script src="/js/jquery.mousewheel.pack.js"></script>
+  
+    <script src="/js/jquery.fancybox.pack.js"></script>
+  
+    <script src="/js/jquery.fancybox-thumbs.js"></script>
+  
+    <script src="/js/plyr.js"></script>
+  
+
+<script>
+
+  // fancybox
+  var backgroundImages = [];
+  
+  $('#post').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox') || $(this).parent().hasClass('fancybox-thumb')) return;
+      var alt = this.alt || this.title;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'post' + i);
+    });
+  });
+  $(".fancybox").fancybox();
+
+var vegasConfig = {"preload­Image":true,"transition":["slideLeft2","slideRight2","flash2"],"timer":true,"delay":5000,"shuffle":true,"count":28};
+var unsplashConfig = {"gravity":"north"};
+// is show background images
+var turnoffBackgroundImage = false;
+
+
+
+  turnoffBackgroundImage = true;
+
+
+var backgroundColor = "34495E";
+
+$(".fancybox-thumb").fancybox({
+  prevEffect: 'none',
+  nextEffect: 'none',
+  helpers: {
+    title: {
+      type: 'outside'
+    },
+    thumbs: {
+      width: 50,
+      height: 50
+    }
+  }
+});
+
+// show video with plyr
+$(".video-container iframe").each(function(i){
+  var url = $(this).attr('src');
+  var id = url.split('/').pop();
+  var plyrContainer = document.createElement('div');
+  plyrContainer.className = 'plyr';
+  var plyrElement = document.createElement('div');
+  plyrElement.dataset.videoId = id;
+  switch(true) {
+    case url.search('youtube.com') >= 0:
+      plyrElement.dataset.type = 'youtube';
+      break;
+    case url.search('vimeo.com') >= 0:
+      plyrElement.dataset.type = 'vimeo';
+      break;
+    default:
+      return;
+  };
+  plyrContainer.appendChild(plyrElement);
+  $(this).parent().html(plyrContainer);
+});
+plyr.setup('.plyr', {iconUrl: '/css/sprite.svg'});
+</script>
+</body>
+</html>
+
