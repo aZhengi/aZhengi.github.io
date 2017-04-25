@@ -1,0 +1,357 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <meta name="author" content="Life">
+  
+  
+  
+  
+    <meta name="description" content="Flex布局是伸缩容器(container)和伸缩项目(item)组成的。
+Flex布局的主题思想是元素可以改变大小以适应可用空间。
+基本概念采用Flex布局的元素，叫做Flex容器(flex container)，他所有的子元素叫做项目(flex item)。
+
+仅是子元素。
+
+容器默认有两根轴，主轴(main axis)和交叉轴(cross axis)，默认情况下主轴是水平的，交叉轴是垂...">
+  
+  <title>老生常谈的Flex布局 [ Life ]</title>
+  
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  
+  <link rel="stylesheet" href="/css/random.css">
+<link rel="stylesheet" href="/css/vegas.min.css">
+<link rel="stylesheet" href="/css/highlight-railscasts.css">
+<link rel="stylesheet" href="/css/jquery.fancybox.css">
+<link rel="stylesheet" href="/css/iconfont/iconfont.css">
+<link rel="stylesheet" href="/css/jquery.fancybox-thumbs.css">
+<link rel="stylesheet" href="/css/plyr.css">
+  
+</head>
+
+<body>
+<div class="side-navigate hide-area">
+  
+    <div class="item prev">
+      <a href="/2017/04/25/扩展的对象功能/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        对象的扩展功能
+      </div>
+    </div>
+  
+  
+</div>
+<div id="outer-container" class="hide-area">
+<div id="container">
+  <div id="menu-outer" class="slide-down">
+    <div id="menu-inner">
+      <div id="brand">
+        
+        <a onClick="openUserCard()">
+          <img id="avatar" src="http://7te9fe.com1.z0.glb.clouddn.com/default_avatar.jpg"/>
+          <div id="homelink">Life</div>
+        </a>
+      </div>
+      <div id="menu-list">
+        <ul>
+        
+        
+          
+            <li>
+          
+            <a href="/index.html">Home</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/archives">Archives</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/tags">Tags</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/categories">Categories</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/about">About</a>
+            
+          </li>
+        
+        </ul>
+      </div>
+      <div id="show-menu">
+        <button>Menu</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="content-outer">
+    <div id="content-inner">
+      
+      
+  <article id="post">
+    <h1>老生常谈的Flex布局</h1>
+    <p class="page-title-sub">
+      <span id = "post-title-date">Created at 2017-04-25</span>
+      
+        <span id = "post-title-updated">Updated at 2017-04-25</span>
+      
+      
+      
+    </p>
+    
+    <p><code>Flex</code>布局是伸缩容器(<code>container</code>)和伸缩项目(<code>item</code>)组成的。</p>
+<p><code>Flex</code>布局的主题思想是元素可以改变大小以适应<strong>可用</strong>空间。</p>
+<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>采用<code>Flex</code>布局的元素，叫做<code>Flex</code>容器(<code>flex container</code>)，他所有的子元素叫做项目(<code>flex item</code>)。</p>
+<blockquote>
+<p>仅是子元素。</p>
+</blockquote>
+<p>容器默认有两根轴，主轴(<code>main axis</code>)和交叉轴(<code>cross axis</code>)，默认情况下主轴是水平的，交叉轴是垂直于主轴的。主轴的起点叫做<code>main start</code>，终点叫做<code>main end</code>；交叉轴的起点叫做<code>cross start</code>，终点叫做<code>cross end</code>。</p>
+<p>单个项目(<code>item</code>)占据的主轴大小称为<code>main size</code>，占据的交叉轴大小称为<code>cross size</code>。</p>
+<p>一张图可以概括上面的一堆话：</p>
+<p><img src="https://mdn.mozillademos.org/files/12998/flexbox.png" alt="弹性布局相关名词"></p>
+<h2 id="容器的属性"><a href="#容器的属性" class="headerlink" title="容器的属性"></a>容器的属性</h2><h3 id="flex-direction属性"><a href="#flex-direction属性" class="headerlink" title="flex-direction属性"></a>flex-direction属性</h3><p>定义:决定主轴的方向(也可以说是项目的排列顺序)</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.container</span>&#123;</div><div class="line">  <span class="attribute">flex-direction</span>: row | row-reverse | column | column-reverse</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/*</span></div><div class="line">主轴水平</div><div class="line">	row(默认值)：从左到右排列</div><div class="line">	row-reverse：从右到左排列</div><div class="line"></div><div class="line">主轴垂直</div><div class="line">	column：从上到下排列</div><div class="line">	column-reverse：从下到上排列</div><div class="line">*/</div></pre></td></tr></table></figure>
+<h3 id="flex-wrap属性"><a href="#flex-wrap属性" class="headerlink" title="flex-wrap属性"></a>flex-wrap属性</h3><p>定义是否换行以及如何换行，默认情况下是不换行的。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.container</span>&#123;</div><div class="line">  <span class="attribute">flex-wrap</span>: nowrap | wrap | wrap-reverse</div><div class="line">&#125;</div><div class="line"><span class="comment">/*</span></div><div class="line">	nowrap	不换行</div><div class="line">	wrap	换行(换行项目 往下换行)</div><div class="line">	wrap-reverse	换行(换行项目 往上还行)</div><div class="line">*/</div></pre></td></tr></table></figure>
+<h3 id="flex-flow"><a href="#flex-flow" class="headerlink" title="flex-flow"></a>flex-flow</h3><p><code>flex-flow</code>是<code>flex-direction</code>和<code>flex-wrap</code>的简写属性，默认值为<code>row nowrap</code></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.container</span>&#123;</div><div class="line">  <span class="attribute">flex-flow</span>: &lt;flex-direction&gt; || &lt;flex-wrap&gt;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="justify-content属性"><a href="#justify-content属性" class="headerlink" title="justify-content属性"></a>justify-content属性</h3><p>定义在主轴上的对齐方式</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.container</span>&#123;</div><div class="line">  <span class="attribute">justify-content</span>: flex-start | flex-end | center | space-between | space-around</div><div class="line">&#125;</div><div class="line"><span class="comment">/*</span></div><div class="line">	flex-start	与主轴的起点对齐</div><div class="line">	flex-end	与主轴的终点对齐</div><div class="line">	center		居于主轴中间</div><div class="line">	space-between	两端对齐，项目之间的间隔都相等。</div><div class="line">	space-around	每个项目两侧的间隔相等，所以项目之间的间隔比项目与边缘的间隔大一倍</div><div class="line">*/</div></pre></td></tr></table></figure>
+<h3 id="align-items属性"><a href="#align-items属性" class="headerlink" title="align-items属性"></a>align-items属性</h3><p>定义项目在交叉轴上如何对齐</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.container</span>&#123;</div><div class="line">  <span class="attribute">align-items</span>: flex-start | flex-end | center | baseline | stretch</div><div class="line">&#125;</div><div class="line"><span class="comment">/*</span></div><div class="line">	flex-start、felx-end、center和justify-content属性一样，不过是对其方式改为交叉轴，下面说两个特殊的</div><div class="line">	baseline	与项目的第一行文字的基线对齐</div><div class="line">	stretch(默认值):	如果项目未设置高度或设为auto，将占满整个容器的高度</div><div class="line">*/</div></pre></td></tr></table></figure>
+<h3 id="align-content属性"><a href="#align-content属性" class="headerlink" title="align-content属性"></a>align-content属性</h3><p>用来调整伸缩项目出现还行后在交叉轴上的对齐方式</p>
+<p>该属性对<code>inline-flex</code>无影响，<code>nowrap</code>时也无效</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.container</span>&#123;</div><div class="line">   <span class="attribute">align-content</span>: flex-start | flex-end | center | space-between | space-around | stretch;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/*</span></div><div class="line">	简单来说就是多行在交叉轴上的对齐方式</div><div class="line">	flex-start：与交叉轴的起点对齐。</div><div class="line">	flex-end：与交叉轴的终点对齐。</div><div class="line">	center：与交叉轴的中点对齐。</div><div class="line">	space-between：与交叉轴两端对齐，轴线之间的间隔平均分布。</div><div class="line">	space-around：每根轴线两侧的间隔都相等。所以，轴线之间的间隔比轴线与边框的间隔大一倍。</div><div class="line">	stretch（默认值）：轴线占满整个交叉轴。</div><div class="line"></div><div class="line">*/</div></pre></td></tr></table></figure>
+<p>关于<code>align-content</code>详细的说明可以看 <a href="https://zhuanlan.zhihu.com/p/25303493" target="_blank" rel="external">知</a></p>
+<h2 id="项目的属性"><a href="#项目的属性" class="headerlink" title="项目的属性"></a>项目的属性</h2><h3 id="order属性"><a href="#order属性" class="headerlink" title="order属性"></a>order属性</h3><p>定义项目在容器的排列顺序，数值越小，越靠前。默认值为0。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.item</span> &#123;</div><div class="line">    <span class="attribute">order</span>: &lt;integer&gt;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="flex-basis属性"><a href="#flex-basis属性" class="headerlink" title="flex-basis属性"></a>flex-basis属性</h3><p>定义了在分配多余空间之前项目占据的主轴空间(<code>main size</code>)，浏览器根据这个属性，计算主轴是否有多余空间。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.item</span> &#123;</div><div class="line">    <span class="attribute">flex-basis</span>: &lt;length&gt; | auto;</div><div class="line">&#125;</div><div class="line"><span class="comment">/*</span></div><div class="line">	若为0%，则把项目视为零尺寸</div><div class="line">	默认值为auto</div><div class="line">*/</div></pre></td></tr></table></figure>
+<h3 id="flex-grow属性"><a href="#flex-grow属性" class="headerlink" title="flex-grow属性"></a>flex-grow属性</h3><p>定义项目的放大比列</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.item</span> &#123;</div><div class="line">    <span class="attribute">flex-grow</span>: &lt;number&gt;;</div><div class="line">&#125;</div><div class="line"><span class="comment">/*</span></div><div class="line">	默认值为0，即有剩余空间也不放大</div><div class="line"></div><div class="line">	如果所有项目的 flex-grow 属性都为 1，则它们将等分剩余空间。(如果有的话)</div><div class="line">	如果一个项目的 flex-grow 属性为 2，其他项目都为 1，则前者占据的剩余空间将比其他项多一倍。</div><div class="line">*/</div></pre></td></tr></table></figure>
+<h3 id="flex-shrink属性"><a href="#flex-shrink属性" class="headerlink" title="flex-shrink属性"></a>flex-shrink属性</h3><p>定义项目的缩小比例</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.item</span> &#123;</div><div class="line">    <span class="attribute">flex-shrink</span>: &lt;number&gt;;</div><div class="line">&#125;</div><div class="line"><span class="comment">/*</span></div><div class="line">	默认值为1，即等比例缩小</div><div class="line">	如果所有项目的 flex-shrink 属性都为 1，当空间不足时，都将等比例缩小。 </div><div class="line">	如果一个项目的 flex-shrink 属性为 0，其他项目都为 1，则空间不足时，前者不缩小。</div><div class="line">*/</div></pre></td></tr></table></figure>
+<h3 id="flex属性"><a href="#flex属性" class="headerlink" title="flex属性"></a>flex属性</h3><p><code>flex-grow</code>，<code>flex-shrink</code>，<code>flex-basis</code>的简写</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.item</span>&#123;</div><div class="line">    <span class="attribute">flex</span>: none | [ &lt;<span class="string">'flex-grow'</span>&gt; &lt;<span class="string">'flex-shrink'</span>&gt;? || &lt;<span class="string">'flex-basis'</span>&gt; ]</div><div class="line">&#125; </div><div class="line"><span class="comment">/*</span></div><div class="line">	若是这三个属性都取默认值，即 flex: 0 1 auto</div><div class="line">*/</div></pre></td></tr></table></figure>
+<p>关于<code>flex</code>取值，有许多特殊的情况，可分为</p>
+<p>当<code>flex</code>取值为一个非负数字，则该数字为<code>flex-grow</code>的值。<code>flex-shrink</code>自动取为1，<code>flex-basis</code>自动取为0%</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.item</span> &#123;<span class="attribute">flex</span>: <span class="number">1</span>;&#125;</div><div class="line"><span class="selector-class">.item</span> &#123;</div><div class="line">    <span class="attribute">flex-grow</span>: <span class="number">1</span>;</div><div class="line">    <span class="attribute">flex-shrink</span>: <span class="number">1</span>;</div><div class="line">    <span class="attribute">flex-basis</span>: <span class="number">0%</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>当<code>flex</code>取值为0时，则如下</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.item</span> &#123;<span class="attribute">flex</span>: <span class="number">0</span>;&#125;</div><div class="line"><span class="selector-class">.item</span> &#123;</div><div class="line">    <span class="attribute">flex-grow</span>: <span class="number">0</span>;</div><div class="line">    <span class="attribute">flex-shrink</span>: <span class="number">1</span>;</div><div class="line">    <span class="attribute">flex-basis</span>: <span class="number">0%</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>当<code>flex</code>取值为一个长度或者百分比时，则将其视为<code>flex-basis</code>的值，其他的值被设置成：<code>flex-grow</code>为1，<code>flex-shrink</code>为1，如下所示</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.item-1</span> &#123;<span class="attribute">flex</span>: <span class="number">0%</span>;&#125;</div><div class="line"><span class="selector-class">.item-1</span> &#123;</div><div class="line">    <span class="attribute">flex-grow</span>: <span class="number">1</span>;</div><div class="line">    <span class="attribute">flex-shrink</span>: <span class="number">1</span>;</div><div class="line">    <span class="attribute">flex-basis</span>: <span class="number">0%</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-class">.item-2</span> &#123;<span class="attribute">flex</span>: <span class="number">24px</span>;&#125;</div><div class="line"><span class="selector-class">.item-2</span> &#123;</div><div class="line">    <span class="attribute">flex-grow</span>: <span class="number">1</span>;</div><div class="line">    <span class="attribute">flex-shrink</span>: <span class="number">1</span>;</div><div class="line">    <span class="attribute">flex-basis</span>: <span class="number">24px</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>当<code>flex</code>取了两个非负数字时，则视为<code>flex-grow</code>和<code>flex-shrink</code>的值，<code>flex-basis</code>自动设置成0%</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.item</span> &#123;<span class="attribute">flex</span>: <span class="number">2</span> <span class="number">3</span>;&#125;</div><div class="line"><span class="selector-class">.item</span> &#123;</div><div class="line">    <span class="attribute">flex-grow</span>: <span class="number">2</span>;</div><div class="line">    <span class="attribute">flex-shrink</span>: <span class="number">3</span>;</div><div class="line">    <span class="attribute">flex-basis</span>: <span class="number">0%</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>当<code>flex</code>取了一个非负数字和一个百分比或者长度时，这将其视为<code>flex-grow</code>和<code>flex-basis</code>的值。<code>flex-shrink</code>自动设置成1</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.item</span> &#123;<span class="attribute">flex</span>: <span class="number">11</span> <span class="number">32px</span>;&#125;</div><div class="line"><span class="selector-class">.item</span> &#123;</div><div class="line">    <span class="attribute">flex-grow</span>: <span class="number">11</span>;</div><div class="line">    <span class="attribute">flex-shrink</span>: <span class="number">1</span>;</div><div class="line">    <span class="attribute">flex-basis</span>: <span class="number">32px</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>在<code>flex</code>属性下，总结上述规则</p>
+<p><code>flex-grow</code>如无显示指明，都为1。(显式指明的情况是<code>flex</code>只取了百分比值或者长度)</p>
+<p><code>flex-shrink</code>如无显式指明，都为1。(显示指明的情况是<code>flex</code>取两个非负数)</p>
+<p><code>flex-basis</code>如无显示指明，都为0%。(显示指明的情况是<code>flex</code>的取值有百分比或者长度)</p>
+</blockquote>
+<h3 id="align-self属性"><a href="#align-self属性" class="headerlink" title="align-self属性"></a>align-self属性</h3><p>单个项目在交叉轴上的对齐方式</p>
+<p>这个属性和的容器(<code>container</code>)的<code>align-items</code>类似，只不过这个属性是对单个项目的对齐进行设置。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.item</span> &#123;</div><div class="line">     <span class="attribute">align-self</span>: auto | flex-start | flex-end | center | baseline | stretch;</div><div class="line">&#125;</div><div class="line"><span class="comment">/*</span></div><div class="line">	默认值为auto，表示继承父元素(容器)的align-items的属性</div><div class="line">	如果没有父元素，则等同于stretch</div><div class="line">*/</div></pre></td></tr></table></figure>
+  </article>
+  <div class="random-toc-area">
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
+  <div class="random-toc">
+    <h2>Table of Content</h2>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#基本概念"><span class="toc-text">基本概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#容器的属性"><span class="toc-text">容器的属性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#flex-direction属性"><span class="toc-text">flex-direction属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#flex-wrap属性"><span class="toc-text">flex-wrap属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#flex-flow"><span class="toc-text">flex-flow</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#justify-content属性"><span class="toc-text">justify-content属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#align-items属性"><span class="toc-text">align-items属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#align-content属性"><span class="toc-text">align-content属性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#项目的属性"><span class="toc-text">项目的属性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#order属性"><span class="toc-text">order属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#flex-basis属性"><span class="toc-text">flex-basis属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#flex-grow属性"><span class="toc-text">flex-grow属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#flex-shrink属性"><span class="toc-text">flex-shrink属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#flex属性"><span class="toc-text">flex属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#align-self属性"><span class="toc-text">align-self属性</span></a></li></ol></li></ol>
+  </div>
+</div>
+
+  
+<nav id="pagination">
+  
+    <a href="/2017/04/25/扩展的对象功能/" class="prev">&larr; Prev post 对象的扩展功能</a>
+  
+
+  
+
+  
+</nav>
+
+  <!-- JiaThis Button BEGIN -->
+
+<!-- JiaThis Button END -->
+
+
+      
+      
+      
+    </div>
+  </div>
+
+  <div id="bottom-outer">
+    <div id="bottom-inner">
+      Site by Life using
+      <a href="http://hexo.io">Hexo</a> & <a href="https://github.com/stiekel/hexo-theme-random">Random</a>
+      <br>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+
+<div id="user-card">
+  <div class="center-field">
+    <img class="avatar" src="http://7te9fe.com1.z0.glb.clouddn.com/default_avatar.jpg">
+    <p id="description"></p>
+    <ul class="social-icon">
+  
+  
+    <li>
+      <a href="https://github.com/azhengi">
+        
+          <i class="icon iconfont github">&#xe606;</i>
+        
+      </a>
+    </li>
+  
+</ul>
+  </div>
+</div>
+
+
+<div id="btn-view">Hide</div>
+
+<script>
+// is trigger analytics / tongji script
+var isIgnoreHost = false;
+
+if(window && window.location && window.location.host) {
+  isIgnoreHost = ["localhost","127.0.0.1"].some(function(address){
+    return 0 === window.location.host.indexOf(address);
+  });
+}
+
+var isTriggerAnalytics = !( true && isIgnoreHost );
+
+</script>
+
+
+
+
+  
+  
+    <script src="/js/jquery-2.2.3.min.js"></script>
+  
+    <script src="/js/vegas.min.js"></script>
+  
+    <script src="/js/random.js"></script>
+  
+    <script src="/js/highlight.pack.js"></script>
+  
+    <script src="/js/jquery.mousewheel.pack.js"></script>
+  
+    <script src="/js/jquery.fancybox.pack.js"></script>
+  
+    <script src="/js/jquery.fancybox-thumbs.js"></script>
+  
+    <script src="/js/plyr.js"></script>
+  
+
+<script>
+
+  // fancybox
+  var backgroundImages = [];
+  
+  $('#post').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox') || $(this).parent().hasClass('fancybox-thumb')) return;
+      var alt = this.alt || this.title;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'post' + i);
+    });
+  });
+  $(".fancybox").fancybox();
+
+var vegasConfig = {"preload­Image":true,"transition":["slideLeft2","slideRight2","flash2"],"timer":true,"delay":5000,"shuffle":true,"count":28};
+var unsplashConfig = {"gravity":"north"};
+// is show background images
+var turnoffBackgroundImage = false;
+
+
+
+  turnoffBackgroundImage = true;
+
+
+var backgroundColor = "34495E";
+
+$(".fancybox-thumb").fancybox({
+  prevEffect: 'none',
+  nextEffect: 'none',
+  helpers: {
+    title: {
+      type: 'outside'
+    },
+    thumbs: {
+      width: 50,
+      height: 50
+    }
+  }
+});
+
+// show video with plyr
+$(".video-container iframe").each(function(i){
+  var url = $(this).attr('src');
+  var id = url.split('/').pop();
+  var plyrContainer = document.createElement('div');
+  plyrContainer.className = 'plyr';
+  var plyrElement = document.createElement('div');
+  plyrElement.dataset.videoId = id;
+  switch(true) {
+    case url.search('youtube.com') >= 0:
+      plyrElement.dataset.type = 'youtube';
+      break;
+    case url.search('vimeo.com') >= 0:
+      plyrElement.dataset.type = 'vimeo';
+      break;
+    default:
+      return;
+  };
+  plyrContainer.appendChild(plyrElement);
+  $(this).parent().html(plyrContainer);
+});
+plyr.setup('.plyr', {iconUrl: '/css/sprite.svg'});
+</script>
+</body>
+</html>
+
